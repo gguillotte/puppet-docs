@@ -9,7 +9,7 @@ toc: false
 
 <div class="translation-notes">
   <p>訳注：このドキュメントは以下のURLにある&quot;Learning Puppet&quot;を日本語訳したものです。<br />
-    <a href="http://docs.puppetlabs.com/learning/introduction.html">http://docs.puppetlabs.com/learning/introduction.html</a></p>
+    <a href="http://docs.puppet.com/learning/introduction.html">http://docs.puppet.com/learning/introduction.html</a></p>
 </div>
 
 <nav class="in-page" id="page-nav">
@@ -32,7 +32,7 @@ toc: false
 <h2 id="welcome">Welcome ～ ようこそ</h2>
 
 <p><strong>Learning Puppet</strong>はPuppet Enterpriseによるシステム設定の管理手法を学ぶためのテキストです。<br />
-Puppetの<a href="http://docs.puppetlabs.com/pe/latest/install_basic.html">インストール手順(英文)</a>と<a href="http://docs.puppetlabs.com/pe/latest/install_basic.html">Puppet言語リファレンス(英文)</a>はリンク先をご覧ください。本テキストはPuppetを使ってシステムを構築するためのガイド付きツアーとなっています。</p>
+Puppetの<a href="/pe/latest/install_basic.html">インストール手順(英文)</a>と<a href="/pe/latest/install_basic.html">Puppet言語リファレンス(英文)</a>はリンク先をご覧ください。本テキストはPuppetを使ってシステムを構築するためのガイド付きツアーとなっています。</p>
 <p>本テキストはPuppetの良い噂を聞いたものの、何から手を付ければ良いかわからない方に最適です。</p>
 
 <h2 id="get-the-free-vm">Get the Free VM ～ 無料のVMをゲットしよう</h2>
@@ -40,7 +40,7 @@ Puppetの<a href="http://docs.puppetlabs.com/pe/latest/install_basic.html">イ�
 <p>Puppetはシステムのほぼ全てを、正しくも正しくなくも設定できます。そのためPuppetを学ぶ際は検証用の機器を使いましょう。<br />
 学習をお手伝いするため、以下のURLでPuppetがインストール済みの仮想マシンを配布しています。怖がらずに試してみましょう！</p>
 
-<p><a href="http://info.puppetlabs.com/download-learning-puppet-VM.html" class="btn">Learning PuppetのVMを取得する</a></p>
+<p><a href="https://puppet.com/download-learning-vm" class="btn">Learning PuppetのVMを取得する</a></p>
 
 <p>仮想マシンをダウンロードしている間に<a href="ral_ja.html">Learning Puppetの最初の章</a>に移りましょう。もしVMが上手く動作しない場合は下記の<a href="#vm-tips">&quot;VM Tips&quot;</a>をご覧ください。</p>
 <p>Learning Puppet VMは、VMWareの.vmx形式とクロスプラットフォームOVF形式で提供しており、VMWare FusionとVirtualBoxで動作を確認しています。</p>
@@ -52,11 +52,11 @@ Puppetの<a href="http://docs.puppetlabs.com/pe/latest/install_basic.html">イ�
     <li>VMは現在のIPアドレスを起動の約10秒後にログインスクリーンに表示するよう設定されています。<br />
       SSH接続の方が良ければ、IPアドレスが表示されるのを待って<code>root@&lt;ログイン後に表示されたIPアドレス&gt;</code>に接続してください。</li>
     <li>Puppet EnterpriseのWebコンソールを表示する場合は、ブラウザで「<strong>https://(VMのIPアドレス)</strong>」にアクセスしてください。「<code>puppet@example.com</code>」でログインできます。パスワードは「<code>learningpuppet</code>」です。</li>
-    <li><strong>Note：</strong>Webコンソールで新しいユーザアカウントを作成した場合、確認用のEメールに間違ったリンクが含まれてしまいます。Webブラウザにコピー＆ペーストし、エンターキーを押す前にホスト名を修正することで、この問題を回避できます。もしくはWebコンソールが信頼できるホスト名で利用可能な場合は、<a href="http://docs.puppetlabs.com/pe/latest/trouble_console-db.html#console-account-confirmation-emails-have-incorrect-links">認証ホスト名を変更する手順に従ってください(英文)</a>。</li>
+    <li><strong>Note：</strong>Webコンソールで新しいユーザアカウントを作成した場合、確認用のEメールに間違ったリンクが含まれてしまいます。Webブラウザにコピー＆ペーストし、エンターキーを押す前にホスト名を修正することで、この問題を回避できます。もしくはWebコンソールが信頼できるホスト名で利用可能な場合は、<a href="/pe/latest/trouble_console-db.html#console-account-confirmation-emails-have-incorrect-links">認証ホスト名を変更する手順に従ってください(英文)</a>。</li>
   </ul>
 </blockquote>
 
-<p>VMはダウンロードするよりも自分で作る派、というこだわりの方も簡単に準備することができます。最小構成のCentOSに&quot;learn.localdomain&quot;というホスト名を設定し、<a href="http://puppetlabs.com/puppet/puppet-enterprise/">Puppet Enterprise</a>をインストールし、<code>iptables</code>を無効にすればよいのです。(他にPuppet言語モードがインストールされたVimとEmacsがインストールされていますが、これは必須ではありません。)</p>
+<p>VMはダウンロードするよりも自分で作る派、というこだわりの方も簡単に準備することができます。最小構成のCentOSに&quot;learn.localdomain&quot;というホスト名を設定し、<a href="https://puppet.com/product">Puppet Enterprise</a>をインストールし、<code>iptables</code>を無効にすればよいのです。(他にPuppet言語モードがインストールされたVimとEmacsがインストールされていますが、これは必須ではありません。)</p>
 
 <p>最初はagentとmasterのVMを分ける必要はありません。このVMは両方の役割で動作できます。agent/master演習にたどり着いたら、新たにagentノードのシステムを複製する方法を説明します。</p>
 <h2 id="contents">Contents ～ 目次</h2>
