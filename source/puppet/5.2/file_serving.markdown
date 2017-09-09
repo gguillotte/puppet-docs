@@ -18,9 +18,9 @@ Generally, [files are stored in modules][module_files]. But if you need to serve
 
 To create a new mount point, you must:
 
-* Choose a directory on disk for the mount point. Make sure Puppet Server can access it, and put files in it as needed.
-* Edit `fileserver.conf` on your Puppet Server node, so Puppet knows which directory to associate with the new mount point.
-* If you want to restrict which nodes can access this mount point, edit `auth.conf`.
+-   Choose a directory on disk for the mount point. Make sure Puppet Server can access it, and put files in it as needed.
+-   Edit `fileserver.conf` on your Puppet Server node, so Puppet knows which directory to associate with the new mount point.
+-   If you want to restrict which nodes can access this mount point, edit `auth.conf`.
 
 Once the mount point is working, you can reference its files like `puppet:///<MOUNT POINT>/<PATH>`.
 
@@ -30,13 +30,13 @@ Puppet URIs are constructed like this:
 
 `puppet://<SERVER>/<MOUNT POINT>/<PATH>`
 
-* `<SERVER>` is optional, which is why you usually see `puppet:///` URIs with three slashes. There's little reason to specify a server, since the default is almost always what you want. (It's the value of the `server` setting in Puppet agent, and a special mock server with a `modules` mount point in Puppet apply.)
-* `<MOUNT POINT>` is a unique identifier for some collection of files. There are basically three kinds:
-    * Custom mount points correspond to an arbitrary directory. The rest of this page is about these.
-    * The special `modules` mount point serves files from the `files` directory of every module. It behaves as if someone had copied the `files` directory from every module into one big directory, renaming each of them with the name of their module. (So the files in `apache/files/...` are available at `puppet:///modules/apache/...`, etc.)
-    * The special `plugins` mount point serves files from the `lib` directory of every module. It behaves as if someone had copied the _contents_ of every `lib` directory into one big directory, with no additional namespacing. Puppet agent uses this mount point when syncing plugins before a run, but there's no reason to use it in a `file` resource.
-    * The special `pluginfacts` mount point serves files from the `facts.d` directory of every module, to support [external facts][]. It behaves like the `plugins` mount point, but with a different source directory.
-* `<PATH>` is the remainder of the path to the file, starting from the directory (or imaginary directory) that corresponds to the mount point.
+-   `<SERVER>` is optional, which is why you usually see `puppet:///` URIs with three slashes. There's little reason to specify a server, since the default is almost always what you want. (It's the value of the `server` setting in Puppet agent, and a special mock server with a `modules` mount point in Puppet apply.)
+-   `<MOUNT POINT>` is a unique identifier for some collection of files. There are basically three kinds:
+    -   Custom mount points correspond to an arbitrary directory. The rest of this page is about these.
+    -   The special `modules` mount point serves files from the `files` directory of every module. It behaves as if someone had copied the `files` directory from every module into one big directory, renaming each of them with the name of their module. (So the files in `apache/files/...` are available at `puppet:///modules/apache/...`, etc.)
+    -   The special `plugins` mount point serves files from the `lib` directory of every module. It behaves as if someone had copied the _contents_ of every `lib` directory into one big directory, with no additional namespacing. Puppet agent uses this mount point when syncing plugins before a run, but there's no reason to use it in a `file` resource.
+    -   The special `pluginfacts` mount point serves files from the `facts.d` directory of every module, to support [external facts][]. It behaves like the `plugins` mount point, but with a different source directory.
+-   `<PATH>` is the remainder of the path to the file, starting from the directory (or imaginary directory) that corresponds to the mount point.
 
 ## Creating a new mount point in `fileserver.conf`
 

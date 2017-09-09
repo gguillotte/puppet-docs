@@ -3,9 +3,6 @@ layout: default
 title: The Puppet Language Style Guide
 ---
 
-The Puppet Language Style Guide
-===========
-
 This style guide applies to Puppet 4 and later. Puppet 3 is no longer supported, but this style guide includes some Puppet 3 guidelines for those who need to maintain older code.
 
 {:.concept}
@@ -13,9 +10,7 @@ This style guide applies to Puppet 4 and later. Puppet 3 is no longer supported,
 
 Unless explicitly called out, everything discussed here applies specifically to Puppet (that is, Puppet modules, Puppet classes, etc.). The name 'Puppet' is not appended to every topic discussed.
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
-"SHOULD NOT", "RECOMMENDED",  "MAY", and "OPTIONAL" in this document are to be
-interpreted as described in [RFC 2119](http://www.faqs.org/rfcs/rfc2119.html).
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED",  "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](http://www.faqs.org/rfcs/rfc2119.html).
 
 {:.concept}
 ## 2. Purpose
@@ -29,17 +24,17 @@ We recommend using [puppet-lint](http://puppet-lint.com/) and [metadata-json-lin
 
 We can never cover every circumstance you might run into when developing Puppet code. When you need to make a judgement call, keep in mind a few general principles.
 
-1. **Readability matters.**
+1.  **Readability matters.**
 
-   If you have to choose between two equal alternatives, pick the more readable one. This is subjective, but if you can read your own code three months from now, it's a great start. In particular, code that generates readable diffs is highly preferred.
-    
-2. **Scoping and simplicity are key.**
+    If you have to choose between two equal alternatives, pick the more readable one. This is subjective, but if you can read your own code three months from now, it's a great start. In particular, code that generates readable diffs is highly preferred.
 
-   When in doubt, err on the side of simplicity. A module should contain related resources that enable it to accomplish a task. If you describe the function of your module and you find yourself using the word "and," consider splitting the module. You should have one goal, with all your classes and parameters focused on achieving it.
+2.  **Scoping and simplicity are key.**
 
-3. **Your module is a piece of software.**
+    When in doubt, err on the side of simplicity. A module should contain related resources that enable it to accomplish a task. If you describe the function of your module and you find yourself using the word "and," consider splitting the module. You should have one goal, with all your classes and parameters focused on achieving it.
 
-   At least, you should treat it that way. When it comes to making decisions, choose the option that is easier to maintain in the long term.
+3.  **Your module is a piece of software.**
+
+    At least, you should treat it that way. When it comes to making decisions, choose the option that is easier to maintain in the long term.
 
 {:.concept}
 ## 4. Versioning
@@ -48,9 +43,9 @@ Your module must be versioned. We recommend semantic versioning.
 
 Semantic versioning, or [SemVer](http://semver.org), means that in a version number given as x.y.z:
 
-* An increase in 'x' indicates major changes: backwards incompatible changes or a complete rewrite.
-* An increase in 'y' indicates minor changes: the non-breaking addition of new features.
-* An increase in 'z' indicates a patch: non-breaking bug fixes.
+-   An increase in 'x' indicates major changes: backward-incompatible changes or a complete rewrite.
+-   An increase in 'y' indicates minor changes: the non-breaking addition of new features.
+-   An increase in 'z' indicates a patch: non-breaking bug fixes.
 
 {:.concept}
 ## 5. Spacing, indentation, and whitespace
@@ -59,20 +54,20 @@ Module manifests should follow best practices for spacing, indentation, and whit
 
 Manifests:
 
-* Must use two-space soft tabs,
-* Must not use literal tab characters,
-* Must not contain trailing whitespace,
-* Must include trailing commas after all resource attributes and parameter definitions,
-* Must end the last line with a new line,
-* Must use one space between the resource type and opening brace, one space between the opening brace and the title, and no spaces between the title and colon.
+-   Must use two-space soft tabs,
+-   Must not use literal tab characters,
+-   Must not contain trailing whitespace,
+-   Must include trailing commas after all resource attributes and parameter definitions,
+-   Must end the last line with a new line,
+-   Must use one space between the resource type and opening brace, one space between the opening brace and the title, and no spaces between the title and colon.
 
-**Good**:
+**Good:**
 
 ```puppet
 file { '/tmp/foo':
 ```
 
-**Bad**:
+**Bad:**
 
 ```puppet
 # space between title and colon
@@ -85,9 +80,9 @@ file{'/tmp/foo':
 file     { '/tmp/foo':
 ```
 
-* Should not exceed a 140-character line width, except where such a limit would be impractical,
-* Should leave one empty line between resources, except when using dependency chains, and
-* May align hash rockets (`=>`) within blocks of attributes, one space after the longest resource key, arranging hashes for maximum readability first.
+-   Should not exceed a 140-character line width, except where such a limit would be impractical,
+-   Should leave one empty line between resources, except when using dependency chains, and
+-   May align hash rockets (`=>`) within blocks of attributes, one space after the longest resource key, arranging hashes for maximum readability first.
 
 {:.section}
 ### 5.1: Arrays and hashes
@@ -96,11 +91,11 @@ To increase readability of arrays and hashes, it is almost always beneficial to 
 
 Use a single line only if that results in overall better readability of the construct where it appears, such as when it is very short. When breaking arrays and hashes, they should have:
 
-* Each element on its on line,
-* Each new element line indented one level,
-* First and last lines used only for the syntax of that data type.
+-   Each element on its on line,
+-   Each new element line indented one level,
+-   First and last lines used only for the syntax of that data type.
 
-**Good**:
+**Good:**
 
 ```puppet
 # array with multiple elements on multiple lines
@@ -118,7 +113,7 @@ $myhash = {
 }
 ```
 
-**Bad**:
+**Bad:**
 
 ```puppet
 # array with multiple elements on same line
@@ -156,39 +151,41 @@ service { 'foo':
 All strings must be enclosed in single quotes, with some exceptions.
 
 A string does not have to be in single quotes if it:
-  * Contains variables.
-  * Contains single quotes.
-  * Contains escaped characters not supported by single-quoted strings.
-  * Is an enumerable set of options, such as present/absent, in which case the single quotes are optional.
-* All variables must be enclosed in braces when interpolated in a string. For example:
 
-  **Good:**
+-   Contains variables.
+-   Contains single quotes.
+-   Contains escaped characters not supported by single-quoted strings.
+-   Is an enumerable set of options, such as present/absent, in which case the single quotes are optional.
 
-  ```puppet
+All variables must be enclosed in braces when interpolated in a string. For example:
+
+**Good:**
+
+```puppet
 "/etc/${file}.conf"
 "${facts['operatingsystem']} is not supported by ${module_name}"
-  ```
+```
 
-  **Bad:**
+**Bad:**
 
-  ```puppet
+```puppet
 "/etc/$file.conf"
 "$facts['operatingsystem'] is not supported by $module_name"
-  ```
+```
 
-* Double quotes should be used rather than escaping when a string contains single quotes, unless that would require an inconvenient amount of additional escaping.
+Double quotes should be used rather than escaping when a string contains single quotes, unless that would require an inconvenient amount of additional escaping.
 
-  **Good:**  
+**Good:**
 
-  ```puppet
+```puppet
 warning("Class['apache'] parameter purge_vdir is deprecated in favor of purge_configs")
-  ```
+```
 
-  **Bad:**
+**Bad:**
 
-  ```puppet
+```puppet
 warning('Class[\'apache\'] parameter purge_vdir is deprecated in favor of purge_configs')
-  ```
+```
 
 {:.section}
 ### 6.1. Escape characters
@@ -257,7 +254,7 @@ Your metadata should follow the below format:
     },
     {
       "operatingsystem": "Ubuntu",
-      "operatingsystemrelease": [ 
+      "operatingsystemrelease": [
         "12.04",
         "10.04"
      ]
@@ -308,11 +305,9 @@ These quoting requirements do not apply to expressions that evaluate to strings.
 {:.section}
 ### 9.2. Arrow alignment
 
-Hash rockets (`=>`) in a resource's attribute/value list may
-be aligned. The hash rockets should be placed one space ahead of the longest
-attribute name. Nested blocks must be indented by two spaces, and hash rockets within a nested block may be aligned (one space ahead of the longest attribute name).
+Hash rockets (`=>`) in a resource's attribute/value list may be aligned. The hash rockets should be placed one space ahead of the longest attribute name. Nested blocks must be indented by two spaces, and hash rockets within a nested block may be aligned (one space ahead of the longest attribute name).
 
-Each attribute should be placed on a separate line, with the exception that very short or single purpose resource declarations may be declared on a single line. 
+Each attribute should be placed on a separate line, with the exception that very short or single purpose resource declarations may be declared on a single line.
 
 **Good:**
 
@@ -355,8 +350,7 @@ file { "/path/to/my-filename.txt":
 {:.section}
 ### 9.3. Attribute ordering
 
-If a resource declaration includes an `ensure` attribute, it should be the
-first attribute specified so that a user can quickly see if the resource is being created or deleted.
+If a resource declaration includes an `ensure` attribute, it should be the first attribute specified so that a user can quickly see if the resource is being created or deleted.
 
 **Good:**
 
@@ -371,7 +365,7 @@ file { '/tmp/readme.txt':
 
 When using the special attribute `*` (asterisk or splat character) in addition to other attributes, splat should be ordered last so that it is easy to see. You may not include multiple splats in the same body.
 
-**Good**:
+**Good:**
 
 ```puppet
 $file_ownership = {
@@ -439,7 +433,7 @@ Semicolon-separated multiple resource bodies should be used only in conjunction 
 $defaults = { < hash of defaults > }
 
 file {
-  default: 
+  default:
     * => $defaults,;
 
   '/tmp/foo':
@@ -453,7 +447,7 @@ file {
 $defaults = { < hash of defaults > }
 
 file {
-  default: 
+  default:
     * => $defaults,;
 
   '/tmp/motd':
@@ -484,9 +478,9 @@ file {
 
 You cannot set any attribute more than once for a given resource; if you try, Puppet raises a compilation error. This means:
 
-* If you use a hash to set attributes for a resource, you cannot set a different, explicit value for any of those attributes. (For example, if mode is present in the hash, you can’t also set mode => "0644" in that resource body.)
-* You can’t use the `*` attribute multiple times in one resource body, because `*` itself acts like an attribute.
-* To use some attributes from a hash and override others, either use a hash to set per-expression defaults, or use the `+` (merging) operator to combine attributes from two hashes (with the right-hand hash overriding the left-hand one).
+-   If you use a hash to set attributes for a resource, you cannot set a different, explicit value for any of those attributes. (For example, if mode is present in the hash, you can’t also set mode => "0644" in that resource body.)
+-   You can’t use the `*` attribute multiple times in one resource body, because `*` itself acts like an attribute.
+-   To use some attributes from a hash and override others, either use a hash to set per-expression defaults, or use the `+` (merging) operator to combine attributes from two hashes (with the right-hand hash overriding the left-hand one).
 
 {:.section}
 ### 9.5. Symbolic links
@@ -513,11 +507,11 @@ file { '/var/log/syslog':
 {:.section}
 ### 9.6. File modes
 
-* POSIX numeric notation must be represented as 4 digits.
-* POSIX symbolic notation must be a string.
-* You should not use file mode with Windows; instead use the [acl module](https://forge.puppet.com/puppetlabs/acl).
-* You should use numeric notation whenever possible.
-* The file mode attribute should always be a quoted string, never an integer.
+-   POSIX numeric notation must be represented as 4 digits.
+-   POSIX symbolic notation must be a string.
+-   You should not use file mode with Windows; instead use the [acl module](https://forge.puppet.com/puppetlabs/acl).
+-   You should use numeric notation whenever possible.
+-   The file mode attribute should always be a quoted string, never an integer.
 
 **Good:**
 
@@ -542,7 +536,7 @@ file { '/var/log/syslog':
 
 Multiple resources declared in a single block should be used only when there is also a default set of options for the resource type.
 
-**Good**:
+**Good:**
 
 ```puppet
 file {
@@ -558,11 +552,11 @@ file {
 }
 
 # Give the defaults a name if used several times
-$our_default_file_attributes = { 
-  'ensure' => 'file', 
-  'mode'   => '0666', 
+$our_default_file_attributes = {
+  'ensure' => 'file',
+  'mode'   => '0666',
 }
- 
+
 file {
   default:
     * => $our_default_file_attributes,;
@@ -573,7 +567,6 @@ file {
   '/bar':
     user => 'staff',;
 }
-
 
 # spell out "magic" iteration
 ['/foo', '/bar'].each |$path| {
@@ -590,7 +583,7 @@ $array_of_paths.each |$path| {
 }
 ```
 
-**Bad**:
+**Bad:**
 
 ```puppet
 file {
@@ -608,7 +601,7 @@ file {
 file { ['/foo', '/bar']:
   ensure => 'file',
 }
- 
+
 file { $array_of_paths:
   ensure => 'file',
 }
@@ -619,17 +612,17 @@ file { $array_of_paths:
 
 Avoid legacy style defaults. If you do use them, they should occur only at top scope in your site manifest. This is because resource defaults propagate through dynamic scope, which can have unpredictable effects far away from where the default was declared.
 
-**Acceptable**:
+**Acceptable:**
 
 ```puppet
 # site.pp:
- 
+
 Package {
   provider => 'zypper',
 }
 ```
 
-**Bad**:
+**Bad:**
 
 ```puppet
 # /etc/puppetlabs/puppet/modules/apache/manifests/init.pp
@@ -650,7 +643,7 @@ concat { $config_file_path:
 
 Resource attributes must be uniformly indented in two spaces from the title.
 
-**Good**:
+**Good:**
 
 ```puppet
 file { '/foo':
@@ -659,7 +652,7 @@ file { '/foo':
 }
 ```
 
-**Bad**:
+**Bad:**
 
 ```puppet
 # too many levels of indentation
@@ -693,7 +686,7 @@ For multiple bodies, each title should be on its own line, and be indented. You 
 file {
   default:
     * => $local_defaults,;
- 
+
   '/foo':
     ensure => 'file',
     owner  => 'root',
@@ -749,32 +742,31 @@ include bar
 {:.section}
 ### 10.2. Internal organization of classes and defined types
 
-Classes and defined types must be structured to accomplish one task. Below is a line-by-line general layout of what lines of code should come first, second, and so on. 
+Classes and defined types must be structured to accomplish one task. Below is a line-by-line general layout of what lines of code should come first, second, and so on.
 
 Documentation [comments](#documentation-comments) for Puppet Strings should be included for each class or defined type. See the [documentation section](#documenting-puppet-code) of this guide for complete documentation recommendations. If used, documentation comments must precede the name of the element.
 
-1. First line: Name of class or type.
-1. Following lines, if applicable: Define parameters. Parameters should be [typed](https://docs.puppet.com/puppet/latest/lang_data_type.html#language:-data-types:-data-type-syntax).
-1. Next lines: Includes and validation come after parameters are defined. Includes may come before or after validation, but should be grouped separately, with all includes and requires in one group and all validations in another. 
-   * Validations should validate any parameters and fail catalog compilation if any
-    parameters are invalid. (See [ntp](https://github.com/puppetlabs/puppetlabs-ntp/blob/3.3.0/manifests/init.pp#L28-L49) for an example.)
-1. Next lines, if applicable: Should declare local variables and perform variable munging.
-1. Next lines: Should declare resource defaults.
-1. Next lines:  Should override resources if necessary.
+1.  First line: Name of class or type.
+1.  Following lines, if applicable: Define parameters. Parameters should be [typed](./lang_data_type.html#language:-data-types:-data-type-syntax).
+1.  Next lines: Includes and validation come after parameters are defined. Includes may come before or after validation, but should be grouped separately, with all includes and requires in one group and all validations in another.
+    -   Validations should validate any parameters and fail catalog compilation if any parameters are invalid. (See [ntp](https://github.com/puppetlabs/puppetlabs-ntp/blob/3.3.0/manifests/init.pp#L28-L49) for an example.)
+1.  Next lines, if applicable: Should declare local variables and perform variable munging.
+1.  Next lines: Should declare resource defaults.
+1.  Next lines:  Should override resources if necessary.
 
 The following examples follows the recommended style:
 
 In `init.pp`:
 
 ```puppet
-# The `myservice` class installs packages, ensures the state of 'myservice', and creates 
+# The `myservice` class installs packages, ensures the state of 'myservice', and creates
 # a tempfile with given content. If the tempfile contents contains digits,
 # they are filtered out.
 #
 # @param service_ensure the wanted state of services
-# @param package_list the list of packages to install, at least one must be given, or an 
+# @param package_list the list of packages to install, at least one must be given, or an
 # error of unsupported 'os' is raised
-# @param tempfile_contents the text to be included in the tempfile, all digits are 
+# @param tempfile_contents the text to be included in the tempfile, all digits are
 # filtered out if present
 #
 class myservice (
@@ -786,7 +778,7 @@ class myservice (
   # there was a type mismatch for $package_list.
   #
   # The list can be "not given", or have an empty list of packages to install
-  # Here an assertion is made that the list is an Array of at least one String, and that 
+  # Here an assertion is made that the list is an Array of at least one String, and that
   # the String is at least one character long.
   #
   assert_type(Array[String[1], 1], $package_list) |$expected, $actual| {
@@ -809,19 +801,19 @@ class myservice (
     ensure    => $service_ensure,
     hasstatus => true,
   }
- 
+
   Package[$package_list] -> Service['myservice']
 }
 ```
- 
+
 In module's `hiera.yaml`:
- 
+
 ```yaml
 ---
 version: 5
 defaults:
   data_hash: yaml_data
- 
+
 # The default values can be merged if you want to extend with additional packages
 # If not, use 'default_hierarchy' instead of 'hierarchy'
 #
@@ -831,20 +823,20 @@ hierarchy:
 - name: 'Common'
   path: 'common.yaml'
 ```
- 
+
 In module `data/common.yaml`:
 
 ```yaml
 myservice::service_ensure: running
 ```
- 
+
 In module `data/os/centos.yaml`:
 
 ```yaml
 myservice::package_list:
 - 'myservice-centos-package'
 ```
- 
+
 In module `data/os/solaris.yaml`:
 
 ```yaml
@@ -865,7 +857,7 @@ You should help indicate to the user which classes are which by making sure all 
 
 Most of the time, use [relationship metaparameters](https://docs.puppet.com/puppet/latest/reference/lang_relationships.html#relationship-metaparameters) rather than [chaining arrows](https://docs.puppet.com/puppet/latest/reference/lang_relationships.html#chaining-arrows). When you have many [interdependent or order-specific items](https://github.com/puppetlabs/puppetlabs-mysql/blob/3.1.0/manifests/server.pp#L64-L72), chaining syntax may be used. A chain operator should appear on the same line as its right-hand operand. Chaining arrows must be used left to right.
 
-**Good:** 
+**Good:**
 
 ```puppet
 # Points left to right
@@ -883,7 +875,7 @@ Package['httpd']
 ```puppet
 # arrows are not all pointing to the right
 Service['httpd'] <- Package['httpd']
- 
+
 # Must be on the right-hand operand's line
 Package['httpd'] ->
 Service['httpd']
@@ -892,8 +884,7 @@ Service['httpd']
 {:.section}
 ### 10.5. Nested classes or defined types
 
-Classes and defined resource types must not be defined within other classes or defined types. Classes and defined types should be declared as close to node scope as possible. If you have a class or defined type which requires another class or defined type, graceful failures must be in place if those required classes or defined types are not declared elsewhere. 
-
+Classes and defined resource types must not be defined within other classes or defined types. Classes and defined types should be declared as close to node scope as possible. If you have a class or defined type which requires another class or defined type, graceful failures must be in place if those required classes or defined types are not declared elsewhere.
 
 **Very Bad:**
 
@@ -966,7 +957,7 @@ with a `hiera.yaml` in the root of the module:
 ```yaml
 ---
 version: 5
-default_hierarchy: 
+default_hierarchy:
 - name: 'defaults'
   path: 'defaults.yaml'
   data_hash: yaml_data
@@ -981,7 +972,7 @@ mymodule::config: 'default config value'
 
 This places the values in the defaults hierarchy, which means that the defaults are not merged into overriding values. If you want to merge the defaults into those values, change the `default_hierarchy` to `hierarchy`.
 
-**Puppet 4.8 and earlier**:
+**Puppet 4.8 and earlier:**
 
 ```puppet
 # using params.pp pattern < Puppet 4.9.0
@@ -1000,7 +991,7 @@ Exported resources should be opt-in rather than opt-out. Your module should not 
 
 When using exported resources, you should name the property `collect_exported`.
 
-Exported resources should be exported and collected selectively using a [search expression](https://docs.puppet.com/puppet/3.7/reference/lang_collectors.html#search-expressions), ideally allowing user-defined tags as parameters so tags can be used to selectively collect by environment or custom fact.
+Exported resources should be exported and collected selectively using a [search expression](https://docs.puppet.com/puppet/latest/reference/lang_collectors.html#search-expressions), ideally allowing user-defined tags as parameters so tags can be used to selectively collect by environment or custom fact.
 
 **Good:**
 
@@ -1026,7 +1017,7 @@ define haproxy::frontend (
 
 Parameters to classes or defined types must be uniformly indented in two spaces from the title. The equals sign should be aligned.
 
-**Good**:
+**Good:**
 
 ```puppet
 class profile::myclass (
@@ -1038,7 +1029,7 @@ class profile::myclass (
 }
 ```
 
-**Bad**:
+**Bad:**
 
 ```puppet
 # too many levels of indentation
@@ -1067,7 +1058,6 @@ class profile::myclass (
 ) {
 # body of class
 }
-
 ```
 
 {:.concept}
@@ -1080,8 +1070,7 @@ In addition to scope and organization, there are some additional guidelines for 
 
 Class inheritance should not be used. Use data binding instead of params.pp pattern. Inheritance should be used only for params.pp, which is not recommended in Puppet 4.
 
-For maintaining older modules, inheritance can be used, but it must not be used across module namespaces. Cross-module dependencies should be satisfied in a more portable way, such as with include statements or relationship declarations. Class inheritance should only be used for `myclass::params` parameter defaults. Other use cases can be accomplished through the addition of parameters or conditional logic. 
-
+For maintaining older modules, inheritance can be used, but it must not be used across module namespaces. Cross-module dependencies should be satisfied in a more portable way, such as with include statements or relationship declarations. Class inheritance should only be used for `myclass::params` parameter defaults. Other use cases can be accomplished through the addition of parameters or conditional logic.
 
 **Good:**
 
@@ -1102,7 +1091,6 @@ class ssh::client inherits workstation { ... }
 
 class wordpress inherits apache { ... }
 ```
-
 
 {:.section}
 ### 11.2 About publicly available modules
@@ -1158,12 +1146,12 @@ Although plain top-scope variables are easier to write, the `$facts` hash is cle
 ### 13.2. Namespacing variables
 
 When referencing top-scope variables other than facts, explicitly specify absolute namespaces for clarity and improved readability. This includes top-scope variables set by the node classifier and in the main manifest.
- 
+
 This is not necessary for:
- 
-* the `$facts` hash.
-* the `$trusted` hash.
-* the `$server_facts` hash.
+
+-   the `$facts` hash.
+-   the `$trusted` hash.
+-   the `$server_facts` hash.
 
 These special variable names are protected; because you cannot create local variables with these names, they always refer to top-scope variables.
 
@@ -1179,7 +1167,7 @@ $facts['operatingsystem']
 $::operatingsystem
 ```
 
-**Very Bad**
+**Very Bad:**
 
 ```puppet
 $operatingsystem
@@ -1255,7 +1243,6 @@ Case and selector values must be quoted.
 
 Selectors should omit default selections only if you explicitly want catalog compilation to fail when no value matches.
 
-
 **Good:**
 
 ```
@@ -1302,11 +1289,11 @@ Your module should have a README in .md (or .markdown) format. READMEs help user
 
 There's an entire [guide](./latest/modules_documentation.html) to writing a great README, but overall your README should:
 
-* Summarize what your module does.
-* Note any setup requirements or limitations (such as "This module requires the puppetlabs-apache module and only works on Ubuntu.").
-* Note any part of a user's system the module might impact (for example, "This module overwrites everything in animportantfile.conf.").
-* Describe how to customize and configure the module.
-* Include usage examples and code samples for the common use cases for your module.
+-   Summarize what your module does.
+-   Note any setup requirements or limitations (such as "This module requires the puppetlabs-apache module and only works on Ubuntu.").
+-   Note any part of a user's system the module might impact (for example, "This module overwrites everything in animportantfile.conf.").
+-   Describe how to customize and configure the module.
+-   Include usage examples and code samples for the common use cases for your module.
 
 {:.section}
 ### 17.2 Documenting Puppet code
@@ -1315,9 +1302,9 @@ Use [Puppet Strings](https://github.com/puppetlabs/puppet-strings) code comments
 
 Include comments for each element (classes, functions, defined types, parameters, and so on) in your module. If used, comments must precede the code for that element. Comments should contain the following information, arranged in this order:
 
-* A description giving an overview of what the element does.
-* Any additional information about valid values that is not clear from the data type. (For example, if the data type is [String], but the value must specifically be a path.)
-* The default value, if any for that element.
+-   A description giving an overview of what the element does.
+-   Any additional information about valid values that is not clear from the data type. (For example, if the data type is [String], but the value must specifically be a path.)
+-   The default value, if any for that element.
 
 Multiline descriptions must be uniformly indented by at least one space.
 
@@ -1325,12 +1312,12 @@ For example:
 
 ```puppet
 # @param config_epp Specifies a file to act as a EPP template for the config file.
-#  Valid options: a path (absolute, or relative to the module path). Example value: 
+#  Valid options: a path (absolute, or relative to the module path). Example value:
 #  'ntp/ntp.conf.epp'. A validation error is thrown if you supply both this param **and**
 #  the `config_template` param.
 ```
 
-If you use Strings to document your module, include information about Strings in the Reference section of your README so that your users will know how to generate the documentation. See [Puppet Strings](https://github.com/puppetlabs/puppet-strings) documentation for details on usage, installation, and correctly writing documentation comments. 
+If you use Strings to document your module, include information about Strings in the Reference section of your README so that your users will know how to generate the documentation. See [Puppet Strings](https://github.com/puppetlabs/puppet-strings) documentation for details on usage, installation, and correctly writing documentation comments.
 
 If you do not include Strings code comments, you should include a Reference section in your README with a complete list of all classes, types, providers, defined types, and parameters that the user can configure. Include a brief description, the valid options, and the default values (if any). For example, this is a parameter for the `ntp` module's `ntp` class:
 
@@ -1349,18 +1336,17 @@ See our module documentation [guide](./latest/modules_documentation.html) for mo
 {:.section}
 ### 17.3 CHANGELOG
 
-Your module should have a CHANGELOG in .md (or .markdown) format. Your CHANGELOG should: 
+Your module should have a CHANGELOG in .md (or .markdown) format. Your CHANGELOG should:
 
-* Have entries for each release. 
-* List bugfixes and features included in the release. 
-* Specifically call out backwards-incompatible changes
+-   Have entries for each release.
+-   List bugfixes and features included in the release.
+-   Specifically call out backward-incompatible changes
 
 {:.concept}
 ## 18. Verification and testing
 
 We recommend several community tools for testing your code and style.
 
-* [puppet-lint](http://puppet-lint.com/) tests your code for adherence to the style guidelines.
-* [metadata-json-lint](https://github.com/voxpupuli/metadata-json-lint) tests your `metadata.json` for adherence to the style guidelines.
-* For testing your module, we recommend rspec. [rspec-puppet](https://github.com/rodjek/rspec-puppet/#rspec-tests-for-your-puppet-manifests--modules) can help you write rspec tests for Puppet.
-
+-   [puppet-lint](http://puppet-lint.com/) tests your code for adherence to the style guidelines.
+-   [metadata-json-lint](https://github.com/voxpupuli/metadata-json-lint) tests your `metadata.json` for adherence to the style guidelines.
+-   For testing your module, we recommend rspec. [rspec-puppet](https://github.com/rodjek/rspec-puppet/#rspec-tests-for-your-puppet-manifests--modules) can help you write rspec tests for Puppet.

@@ -2,7 +2,6 @@
 title: "Hiera: What is Hiera?"
 ---
 
-
 [auto_lookup]: ./hiera_automatic.html
 [facts]: ./lang_facts_and_builtin_vars.html
 [roles_and_profiles]: {{pe}}/r_n_p_intro.html
@@ -38,10 +37,9 @@ The best way to do this is to adopt sensible, rigorous rules about _where_ and _
 
 For most Puppet users, [the roles and profiles method][roles_and_profiles] is a good starting point. It sets simple rules about what should and shouldn't be configured with Hiera, and strikes a good balance between flexibility and maintainability.
 
-
 ## What's the deal with Hiera 5?
 
-"Hiera 5" is a backwards-compatible evolution of Hiera. It's built into this version of Puppet --- you're already using it, though you might not have enabled its new features yet.
+"Hiera 5" is a backward-compatible evolution of Hiera. It's built into this version of Puppet --- you're already using it, though you might not have enabled its new features yet.
 
 ### Hiera isn't separate from Puppet anymore
 
@@ -53,8 +51,8 @@ Now, Hiera is fully integrated into Puppet.
 
 The biggest new feature in Hiera 5 is independent hierarchy configurations for each environment and module. This means:
 
-* Your main Hiera data was already in your environments, but now its configuration lives right alongside it. So making changes to the hierarchy is as safe and testable as any other change to your code or data.
-* Module authors can use the power of Hiera to set default values for their modules, and users can override those defaults without having to worry about how they're implemented.
+-   Your main Hiera data was already in your environments, but now its configuration lives right alongside it. So making changes to the hierarchy is as safe and testable as any other change to your code or data.
+-   Module authors can use the power of Hiera to set default values for their modules, and users can override those defaults without having to worry about how they're implemented.
 
 Read about [Hiera's system of three layers][layers] for more info.
 
@@ -66,7 +64,7 @@ We've totally overhauled the interface for building custom backends, so it's eas
 
 The experimental "Puppet lookup" feature (from Puppet 4.3 through 4.8) was effectively Hiera 4 --- it used a "version: 4" hiera.yaml file, and included rough drafts of many features we completed for Hiera 5.
 
-Hiera 5 is backwards compatible with Puppet lookup, and supports v4 hiera.yaml files. Hiera still uses the `lookup` function and `puppet lookup` command.
+Hiera 5 is backward compatible with Puppet lookup, and supports v4 hiera.yaml files. Hiera still uses the `lookup` function and `puppet lookup` command.
 
 ### Am I going to have to change all my data and config files?
 
@@ -82,18 +80,17 @@ As soon as possible, the backend's maintainer should rewrite it to support Hiera
 
 ### Some features are deprecated
 
-
 The current list of deprecated Hiera features includes:
 
-* The [classic `hiera_*` functions][hiera_functions]. (They're fully replaced by the `lookup` function.)
-* The `hiera` command line tool, which was used for testing and exploring data. (It's replaced by the `puppet lookup` command, which understands concepts like nodes and environments and can automatically get facts from PuppetDB.)
-* [Version 3][v3] and [version 4][v4] of the hiera.yaml file.
-* Custom backends written for Hiera ≤ 3. They should be rewritten for the [new, simpler custom backend system][custom_backend].
-* Setting a global hash merge behavior in hiera.yaml. (Merge behavior is now [configured per-key and per-lookup][merging].)
-* The `data_binding_terminus` setting. If you use a custom terminus, convert it to a [Hiera 5 custom backend][custom_backend].
-* The following special pseudo-variables:
-    * `calling_module`
-    * `calling_class`
-    * `calling_class_path`
+-   The [classic `hiera_*` functions][hiera_functions]. (They're fully replaced by the `lookup` function.)
+-   The `hiera` command line tool, which was used for testing and exploring data. (It's replaced by the `puppet lookup` command, which understands concepts like nodes and environments and can automatically get facts from PuppetDB.)
+-   [Version 3][v3] and [version 4][v4] of the hiera.yaml file.
+-   Custom backends written for Hiera ≤ 3. They should be rewritten for the [new, simpler custom backend system][custom_backend].
+-   Setting a global hash merge behavior in hiera.yaml. (Merge behavior is now [configured per-key and per-lookup][merging].)
+-   The `data_binding_terminus` setting. If you use a custom terminus, convert it to a [Hiera 5 custom backend][custom_backend].
+-   The following special pseudo-variables:
+    -   `calling_module`
+    -   `calling_class`
+    -   `calling_class_path`
 
     Hiera 3 could use these as a hacky predecessor of module data, but anything you were doing with them is better accomplished with [the module layer][module layer]. You can continue using these in a [version 3 hiera.yaml file][v3], but you'll need to remove them once you update your global config to [version 5][v5].
