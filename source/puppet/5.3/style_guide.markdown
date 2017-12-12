@@ -3,9 +3,6 @@ layout: default
 title: The Puppet Language Style Guide
 ---
 
-The Puppet Language Style Guide
-===========
-
 This style guide applies to Puppet 4 and later. Puppet 3 is no longer supported, but this style guide includes some Puppet 3 guidelines for those who need to maintain older code.
 
 > A new function section has been added to the style guide at section 15. This changes the numbering from this section forward.
@@ -31,7 +28,7 @@ We can never cover every circumstance you might run into when developing Puppet 
 1. **Readability matters.**
 
    If you have to choose between two equal alternatives, pick the more readable one. This is subjective, but if you can read your own code three months from now, it's a great start. In particular, code that generates readable diffs is highly preferred.
-    
+
 2. **Scoping and simplicity are key.**
 
    When in doubt, err on the side of simplicity. A module should contain related resources that enable it to accomplish a task. If you describe the function of your module and you find yourself using the word "and," consider splitting the module. You should have one goal, with all your classes and parameters focused on achieving it.
@@ -169,7 +166,7 @@ A string does not have to be in single quotes if it:
 
 * Double quotes should be used rather than escaping when a string contains single quotes, unless that would require an inconvenient amount of additional escaping.
 
-  **Good:**  
+  **Good:**
 
   ```puppet
 warning("Class['apache'] parameter purge_vdir is deprecated in favor of purge_configs")
@@ -258,7 +255,7 @@ Hash rockets (`=>`) in a resource's attribute/value list may
 be aligned. The hash rockets should be placed one space ahead of the longest
 attribute name. Nested blocks must be indented by two spaces, and hash rockets within a nested block may be aligned (one space ahead of the longest attribute name).
 
-Each attribute should be placed on a separate line, with the exception that very short or single purpose resource declarations may be declared on a single line. 
+Each attribute should be placed on a separate line, with the exception that very short or single purpose resource declarations may be declared on a single line.
 
 **Good:**
 
@@ -385,7 +382,7 @@ Semicolon-separated multiple resource bodies should be used only in conjunction 
 $defaults = { < hash of defaults > }
 
 file {
-  default: 
+  default:
     * => $defaults,;
 
   '/tmp/foo':
@@ -399,7 +396,7 @@ file {
 $defaults = { < hash of defaults > }
 
 file {
-  default: 
+  default:
     * => $defaults,;
 
   '/tmp/motd':
@@ -504,11 +501,11 @@ file {
 }
 
 # Give the defaults a name if used several times
-$our_default_file_attributes = { 
-  'ensure' => 'file', 
-  'mode'   => '0666', 
+$our_default_file_attributes = {
+  'ensure' => 'file',
+  'mode'   => '0666',
 }
- 
+
 file {
   default:
     * => $our_default_file_attributes,;
@@ -554,7 +551,7 @@ file {
 file { ['/foo', '/bar']:
   ensure => 'file',
 }
- 
+
 file { $array_of_paths:
   ensure => 'file',
 }
@@ -569,7 +566,7 @@ Avoid legacy style defaults. If you do use them, they should occur only at top s
 
 ```puppet
 # site.pp:
- 
+
 Package {
   provider => 'zypper',
 }
@@ -639,7 +636,7 @@ For multiple bodies, each title should be on its own line, and be indented. You 
 file {
   default:
     * => $local_defaults,;
- 
+
   '/foo':
     ensure => 'file',
     owner  => 'root',
@@ -727,13 +724,13 @@ include bar
 {:.section}
 ### Internal organization of classes and defined types
 
-Classes and defined types must be structured to accomplish one task. Below is a line-by-line general layout of what lines of code should come first, second, and so on. 
+Classes and defined types must be structured to accomplish one task. Below is a line-by-line general layout of what lines of code should come first, second, and so on.
 
 Documentation [comments](#documentation-comments) for Puppet Strings should be included for each class or defined type. See the [documentation section](#documenting-puppet-code) of this guide for complete documentation recommendations. If used, documentation comments must precede the name of the element.
 
 1. First line: Name of class or type.
 1. Following lines, if applicable: Define parameters. Parameters should be [typed](https://docs.puppet.com/puppet/latest/lang_data_type.html#language:-data-types:-data-type-syntax).
-1. Next lines: Includes and validation come after parameters are defined. Includes may come before or after validation, but should be grouped separately, with all includes and requires in one group and all validations in another. 
+1. Next lines: Includes and validation come after parameters are defined. Includes may come before or after validation, but should be grouped separately, with all includes and requires in one group and all validations in another.
    * Validations should validate any parameters and fail catalog compilation if any
     parameters are invalid. (See [ntp](https://github.com/puppetlabs/puppetlabs-ntp/blob/3.3.0/manifests/init.pp#L28-L49) for an example.)
 1. Next lines, if applicable: Should declare local variables and perform variable munging.
@@ -745,14 +742,14 @@ The following examples follows the recommended style:
 In `init.pp`:
 
 ```puppet
-# The `myservice` class installs packages, ensures the state of 'myservice', and creates 
+# The `myservice` class installs packages, ensures the state of 'myservice', and creates
 # a tempfile with given content. If the tempfile contents contains digits,
 # they are filtered out.
 #
 # @param service_ensure the wanted state of services
-# @param package_list the list of packages to install, at least one must be given, or an 
+# @param package_list the list of packages to install, at least one must be given, or an
 # error of unsupported 'os' is raised
-# @param tempfile_contents the text to be included in the tempfile, all digits are 
+# @param tempfile_contents the text to be included in the tempfile, all digits are
 # filtered out if present
 #
 class myservice (
@@ -764,7 +761,7 @@ class myservice (
   # there was a type mismatch for $package_list.
   #
   # The list can be "not given", or have an empty list of packages to install
-  # Here an assertion is made that the list is an Array of at least one String, and that 
+  # Here an assertion is made that the list is an Array of at least one String, and that
   # the String is at least one character long.
   #
   assert_type(Array[String[1], 1], $package_list) |$expected, $actual| {
@@ -787,19 +784,19 @@ class myservice (
     ensure    => $service_ensure,
     hasstatus => true,
   }
- 
+
   Package[$package_list] -> Service['myservice']
 }
 ```
- 
+
 In module's `hiera.yaml`:
- 
+
 ```yaml
 ---
 version: 5
 defaults:
   data_hash: yaml_data
- 
+
 # The default values can be merged if you want to extend with additional packages
 # If not, use 'default_hierarchy' instead of 'hierarchy'
 #
@@ -809,20 +806,20 @@ hierarchy:
 - name: 'Common'
   path: 'common.yaml'
 ```
- 
+
 In module `data/common.yaml`:
 
 ```yaml
 myservice::service_ensure: running
 ```
- 
+
 In module `data/os/centos.yaml`:
 
 ```yaml
 myservice::package_list:
 - 'myservice-centos-package'
 ```
- 
+
 In module `data/os/solaris.yaml`:
 
 ```yaml
@@ -843,7 +840,7 @@ You should help indicate to the user which classes are which by making sure all 
 
 Most of the time, use [relationship metaparameters](https://docs.puppet.com/puppet/latest/lang_relationships.html#relationship-metaparameters) rather than [chaining arrows](https://docs.puppet.com/puppet/latest/lang_relationships.html#chaining-arrows). When you have many [interdependent or order-specific items](https://github.com/puppetlabs/puppetlabs-mysql/blob/3.1.0/manifests/server.pp#L64-L72), chaining syntax may be used. A chain operator should appear on the same line as its right-hand operand. Chaining arrows must be used left to right.
 
-**Good:** 
+**Good:**
 
 ```puppet
 # Points left to right
@@ -861,7 +858,7 @@ Package['httpd']
 ```puppet
 # arrows are not all pointing to the right
 Service['httpd'] <- Package['httpd']
- 
+
 # Must be on the right-hand operand's line
 Package['httpd'] ->
 Service['httpd']
@@ -870,7 +867,7 @@ Service['httpd']
 {:.section}
 ### Nested classes or defined types
 
-Classes and defined resource types must not be defined within other classes or defined types. Classes and defined types should be declared as close to node scope as possible. If you have a class or defined type which requires another class or defined type, graceful failures must be in place if those required classes or defined types are not declared elsewhere. 
+Classes and defined resource types must not be defined within other classes or defined types. Classes and defined types should be declared as close to node scope as possible. If you have a class or defined type which requires another class or defined type, graceful failures must be in place if those required classes or defined types are not declared elsewhere.
 
 
 **Very Bad:**
@@ -944,7 +941,7 @@ with a `hiera.yaml` in the root of the module:
 ```yaml
 ---
 version: 5
-default_hierarchy: 
+default_hierarchy:
 - name: 'defaults'
   path: 'defaults.yaml'
   data_hash: yaml_data
@@ -1055,7 +1052,7 @@ In addition to scope and organization, there are some additional guidelines for 
 
 Class inheritance should not be used. Use data binding instead of params.pp pattern. Inheritance should be used only for params.pp, which is not recommended in Puppet 4.
 
-For maintaining older modules, inheritance can be used, but it must not be used across module namespaces. Cross-module dependencies should be satisfied in a more portable way, such as with include statements or relationship declarations. Class inheritance should only be used for `myclass::params` parameter defaults. Other use cases can be accomplished through the addition of parameters or conditional logic. 
+For maintaining older modules, inheritance can be used, but it must not be used across module namespaces. Cross-module dependencies should be satisfied in a more portable way, such as with include statements or relationship declarations. Class inheritance should only be used for `myclass::params` parameter defaults. Other use cases can be accomplished through the addition of parameters or conditional logic.
 
 
 **Good:**
@@ -1100,9 +1097,9 @@ Although plain top-scope variables are easier to write, the `$facts` hash is cle
 ### Namespacing variables
 
 When referencing top-scope variables other than facts, explicitly specify absolute namespaces for clarity and improved readability. This includes top-scope variables set by the node classifier and in the main manifest.
- 
+
 This is not necessary for:
- 
+
 * the `$facts` hash.
 * the `$trusted` hash.
 * the `$server_facts` hash.
@@ -1258,7 +1255,7 @@ Your metadata should follow the below format:
     },
     {
       "operatingsystem": "Ubuntu",
-      "operatingsystemrelease": [ 
+      "operatingsystemrelease": [
         "12.04",
         "10.04"
      ]
@@ -1317,12 +1314,12 @@ For example:
 
 ```puppet
 # @param config_epp Specifies a file to act as a EPP template for the config file.
-#  Valid options: a path (absolute, or relative to the module path). Example value: 
+#  Valid options: a path (absolute, or relative to the module path). Example value:
 #  'ntp/ntp.conf.epp'. A validation error is thrown if you supply both this param **and**
 #  the `config_template` param.
 ```
 
-If you use Strings to document your module, include information about Strings in the Reference section of your README so that your users will know how to generate the documentation. See [Puppet Strings](https://github.com/puppetlabs/puppet-strings) documentation for details on usage, installation, and correctly writing documentation comments. 
+If you use Strings to document your module, include information about Strings in the Reference section of your README so that your users will know how to generate the documentation. See [Puppet Strings](https://github.com/puppetlabs/puppet-strings) documentation for details on usage, installation, and correctly writing documentation comments.
 
 If you do not include Strings code comments, you should include a Reference section in your README with a complete list of all classes, types, providers, defined types, and parameters that the user can configure. Include a brief description, the valid options, and the default values (if any). For example, this is a parameter for the `ntp` module's `ntp` class:
 
@@ -1341,10 +1338,10 @@ See our module documentation [guide](https://puppet.com/docs/puppet/5.3/modules_
 {:.section}
 #### CHANGELOG
 
-Your module should have a CHANGELOG in .md (or .markdown) format. Your CHANGELOG should: 
+Your module should have a CHANGELOG in .md (or .markdown) format. Your CHANGELOG should:
 
-* Have entries for each release. 
-* List bugfixes and features included in the release. 
+* Have entries for each release.
+* List bugfixes and features included in the release.
 * Specifically call out backwards-incompatible changes
 
 {:.section}
