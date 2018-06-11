@@ -1,6 +1,10 @@
-## Report Format 7
+## Report Format 8
 
-This is the format of reports output by Puppet versions 5.0 and later.
+This is the format of reports output by Puppet 5.3.8 and later, and Puppet 5.5.3 and later. Nothing in report format 7 was removed from report format 8, so it is backward-compatible.
+
+### Differences from Report Format 7
+
+-   `failed_to_restart` was added to `Puppet::Resource::Status`
 
 ### Puppet::Transaction::Report
 
@@ -85,6 +89,7 @@ A Puppet::Resource::Status object represents the status of a single resource.
   <tr><td>changed</td><td>boolean</td><td>True if change_count > 0, otherwise false. Deprecated.</td></tr>
   <tr><td>skipped</td><td>boolean</td><td>True if the resource was skipped, otherwise false.</td></tr>
   <tr><td>failed</td><td>boolean</td><td>True if Puppet experienced an error while evaluating this resource, otherwise false. Deprecated.</td></tr>
+  <tr><td>failed_to_restart</td><td>boolean</td><td>True if Puppet experienced an error while trying to restart this resource (for example, when a Service resource has been notified from another resource), otherwise false.</td></tr>
   <tr><td>containment_path</td><td>array</td><td>An array of strings; each element represents a container (type or class) that, together, make up the path of the resource in the catalog.</td></tr>
 </table>
 
@@ -113,7 +118,3 @@ A Puppet::Transaction::Event object represents a single event for a single resou
 * `failure`: property was out of sync, and couldn't be changed to be in sync due to an error.
 * `noop`: property was out of sync, and wasn't changed due to noop mode.
 * `audit`: property was in sync, and was being audited.
-
-### Differences from Report Format 6
-
-* `kind` was removed from `Puppet::Transaction::Report`
