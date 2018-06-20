@@ -12,6 +12,8 @@ title: "The hiera.yaml config file"
 [deep_merge_gem_docs]: https://github.com/danielsdeleo/deep_merge/blob/master/README.md
 
 {% partial ./_hiera_deprecation.md %}
+>
+> Hiera 3 configuration files are compatible with newer versions of Hiera, but configuration files in newer versions of Hiera _are not_ compatible with Hiera 3 and older.
 
 Hiera's config file is usually referred to as `hiera.yaml`. Use this file to configure the [hierarchy][], which backend(s) to use, and settings for each backend.
 

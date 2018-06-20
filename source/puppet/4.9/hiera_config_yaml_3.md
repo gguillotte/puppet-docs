@@ -17,7 +17,7 @@ title: "Hiera: Legacy config file syntax (hiera.yaml v3)"
 
 Hiera's config file is called hiera.yaml. It configures the [hierarchy][] for a given [layer][layers] of data.
 
-This version of Puppet supports three formats for hiera.yaml --- you can use any of them, although [v4][] and v3 are deprecated. This page is about version 3, the legacy version.
+This version of Puppet supports three formats for hiera.yaml --- you can use any of them, although **[v4][] and v3 are deprecated**. This page is about version 3, the legacy version.
 
 Format | Allowed in                    | Description
 -------|-------------------------------|------------
@@ -36,7 +36,9 @@ More importantly, it has some major problems:
 * Global configuration of deep hash merge behavior was a terrible idea. Hiera 5 has [better ways to configure it on a per-key basis.][merge]
 * hiera.yaml v5 can support v3 backends, but not vice-versa.
 
-You should upgrade your global hiera.yaml to [version 5][v5] when you get the chance.
+If you're using Hiera 5, upgrade your global hiera.yaml configuration file to [version 5][v5] as soon as possible.
+
+Note that newer versions of Hiera configuration files are not compatible with Hiera 3 and earlier. The deprecated `hiera` command-line interface works only when using configuration files from Hiera v3 or earlier. When using newer formats of hiera.yaml configuration files, use the `puppet lookup` command to query your hierarchy.
 
 ## Location
 
